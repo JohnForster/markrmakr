@@ -1,7 +1,27 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/johnforster/repos/makers/week_4/markrmakr/spec/bookmark_spec.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/johnforster/repos/makers/week_4/markrmakr/spec/features/features_spec.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ]
     },
-    "timestamp": 1530538885
+    "timestamp": 1530542356
   }
 }
