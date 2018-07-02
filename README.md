@@ -1,3 +1,13 @@
+##Readme
+
+##Domain Model
+Controller
+|»Model
+||»Database
+|»View
+
+
+##User Stories
 As a user,
 So that I can see the bookmarks I have previously added,
 I want to view a list of currently available bookmarks
