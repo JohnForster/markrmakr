@@ -1,7 +1,6 @@
 require 'pg'
 
 class Bookmark
-  @bookmarks = ['wikipedia.org', 'facebook.com']
 
   def self.all
     results = connection.exec 'SELECT url FROM bookmarks'
@@ -9,6 +8,14 @@ class Bookmark
   end
 
   def self.connection
-    PG.connect dbname: 'bookmark_manager', user: 'johnforster'
+    PG.connect dbname: dbname
+  end
+
+  def self.dbname
+    ENV['ENVIRONMENT'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'
+  end
+
+  def self.add(url)
+    connection.exec "INSERT INTO bookmarks (url) VALUES ('#{url}');"
   end
 end

@@ -19,3 +19,9 @@ h1 {
   -webkit-text-stroke: 1px white;
   color: var(--color2);
 }
+
+h2 {
+  font-size: 30pt;
+  -webkit-text-stroke: 1px white;
+  color: var(--color2);
+}

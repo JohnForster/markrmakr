@@ -1,7 +1,9 @@
 ENV['RACK_ENV'] = 'test'
+ENV['ENVIRONMENT'] = 'test'
 
 require_relative '../app.rb'
 require_relative './features/web_helpers.rb'
+require_relative './reset_database.rb'
 
 require 'capybara'
 require 'capybara/rspec'
@@ -9,9 +11,9 @@ require 'rspec'
 require 'simplecov'
 require 'simplecov-console'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::Console,
-])
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+  [SimpleCov::Formatter::Console]
+)
 SimpleCov.start
 
 RSpec.configure do |config|
@@ -22,6 +24,10 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
   config.shared_context_metadata_behavior = :apply_to_host_groups
+
+  config.before(:each) do
+    reset_database!
+  end
 end
 
 Capybara.app = MarkrMakr

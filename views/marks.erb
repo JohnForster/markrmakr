@@ -1,8 +1,12 @@
 <link rel="stylesheet" href="stylesheet.css" type="text/css" />
-
+<h2>MarkrMakr</h2>
 <center>
   <h1> Yr 'marks </h1>
   <% @marks.each { |x| %>
     <%= x %> <br>
   <% } %>
+  <br>
+  <form action='/marks/new'>
+    <input type=submit value='New mark'>
+  </form>
 </center>
