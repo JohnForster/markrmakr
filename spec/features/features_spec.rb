@@ -29,4 +29,12 @@ feature 'adding a new link' do
     expect(page).to have_content('tumblr.com')
     expect(page).not_to have_content('ERROR')
   end
+
+  scenario 'error is raised if link is not a valid url' do
+    visit('/marks/new')
+    fill_in('URL', with: 'gibberish')
+    click_button("Make yr 'mark!")
+    expect(page).to have_content 'Invalid URL!'
+    expect(page).not_to have_content('ERROR')
+  end
 end

@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require_relative './lib/bookmark.rb'
 
+# The MarkrMakr main app controller.
 class MarkrMakr < Sinatra::Base
   get '/' do
     erb(:index)
@@ -16,7 +17,7 @@ class MarkrMakr < Sinatra::Base
   end
 
   post '/marks' do
-    Bookmark.add(params[:URL])# add mark to Database
+    flash[:notice] = 'Invalid URL!' unless Bookmark.add(params[:URL])
     redirect '/marks'
   end
 
