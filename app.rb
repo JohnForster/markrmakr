@@ -1,8 +1,13 @@
+require 'sinatra'
 require 'sinatra/base'
+require 'sinatra/flash'
 require_relative './lib/bookmark.rb'
 
 # The MarkrMakr main app controller.
 class MarkrMakr < Sinatra::Base
+  enable :sessions
+  register Sinatra::Flash
+
   get '/' do
     erb(:index)
   end
@@ -17,8 +22,12 @@ class MarkrMakr < Sinatra::Base
   end
 
   post '/marks' do
-    flash[:notice] = 'Invalid URL!' unless Bookmark.add(params[:URL])
-    redirect '/marks'
+    if Bookmark.add(url: params[:URL], title: params[:title])
+      redirect '/marks'
+    else
+      flash[:notice] = 'Invalid URL!'
+      redirect '/marks/new'
+    end
   end
 
   run! if app_file == $PROGRAM_NAME

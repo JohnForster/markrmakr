@@ -1,13 +1,17 @@
 <link rel="stylesheet" href="../stylesheet.css" type="text/css" />
 
-<h2>MarkrMakr</h2>
+
+<h2 color=red >MarkrMakr</h2>
 <center>
   <form action='/marks' method='post'>
-    <h3>Add a new 'mark</h3>
+    <h1>Add a new 'mark</h1>
     <div>
       URL:
-      <input type=text name=URL placeholder="e.g. https://markrmakr.com"><br><br>
+      <input type=text name=URL placeholder="e.g. https://markrmakr.com"><br>
+      Title:
+      <input type=text name=title placeholder="e.g. MarkrMakr"><br><br>
       <input type=submit value="Make yr 'mark!">
     </div>
   </form>
+  <%=flash[:notice]%>
 </center>

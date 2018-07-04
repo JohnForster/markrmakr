@@ -5,11 +5,12 @@
 */
 
 :root {
-  --color1: #001242;
-  --color2: #53a2be;
-  --color3: #0094c6;
-  --color4: #005e7c;
-  --color5: #e8f1f4;
+  --color1: #4d685a;
+  --color2: #4fb286;
+  --color3: #3c896d;
+  --color4: #546d64;
+  --color5: #dffff0;
+  --error1: #7d1c3a;
 }
 
 body {
