@@ -64,6 +64,7 @@ class Bookmark
   end
 
   def self.update(args)
+    return false unless url?(args[:url])
     connection.exec(
       "UPDATE bookmarks
        SET title = '#{args[:title]}', url = '#{args[:url]}'

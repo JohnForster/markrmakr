@@ -42,8 +42,12 @@ class MarkrMakr < Sinatra::Base
   end
 
   patch '/marks/:id' do
-    Bookmark.update(id: params['id'], url: params[:URL], title: params[:title])
-    redirect '/marks'
+    if Bookmark.update(id: params['id'], url: params[:URL], title: params[:title])
+      redirect '/marks'
+    else
+      flash[:notice] = 'Invalid URL!'
+      redirect "/marks/#{params['id']}/edit"
+    end
   end
 
   run! if app_file == $PROGRAM_NAME

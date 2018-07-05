@@ -61,7 +61,7 @@ feature 'deleting a link' do
     fill_in('URL', with: 'https://bbc.co.uk')
     fill_in('title', with: 'BBC')
     click_button("Make yr mark!")
-    click_button(id: 'BBC', value:'Edit')
+    click_button(id: 'BBC', value: 'Edit')
     click_button('Delete this mark')
     expect(page).to have_content 'Yr marks'
     expect(page).not_to have_content 'BBC'
@@ -80,5 +80,21 @@ feature 'editing a link' do
     click_button('Change mark')
     expect(page).to have_content('Google')
     expect(page).not_to have_content('Goggle')
+  end
+
+  scenario 'error is raised if link is not a valid url' do
+    connection = PG.connect dbname: 'bookmark_manager_test'
+    connection.exec(
+      "INSERT INTO bookmarks (url, title)
+       VALUES ('http://makersacademy.com', 'Makers');"
+    )
+    visit('/')
+    click_button("View marks")
+    click_button(id: 'Makers', value: 'Edit')
+    fill_in('URL', with: 'gibberish')
+    fill_in('title', with: 'GibberishTitle')
+    click_button('Change mark')
+    expect(page).to have_content 'Invalid URL!'
+    expect(page).not_to have_content('ERROR')
   end
 end
