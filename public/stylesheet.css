@@ -13,6 +13,27 @@
   --error1: #7d1c3a;
 }
 
+a:link {
+  text-decoration: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+a:visited {
+  text-decoration: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+a.backlink:hover {
+  border: 0;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
 body {
   font-family: arial;
   background-color: var(--color1);
@@ -24,16 +45,19 @@ div {
   background-color: var(--color2);
   padding: 25px;
   width: 350px;
+  border-radius: 10px;
 }
 
 h1 {
   font-size: 40pt;
   -webkit-text-stroke: 1px var(--color5);
   color: var(--color3);
+  text-shadow: 2px 2px 4px #000000;
 }
 
 h2 {
   font-size: 30pt;
   -webkit-text-stroke: 1px var(--color5);
   color: var(--color3);
+  text-shadow: 2px 2px 4px #000000;
 }

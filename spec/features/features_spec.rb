@@ -40,3 +40,15 @@ feature 'adding a new link' do
     expect(page).not_to have_content('ERROR')
   end
 end
+
+feature 'clicking a link' do
+  scenario 'should take you to the contained link' do
+    connection = PG.connect dbname: 'bookmark_manager_test'
+    connection.exec(
+      "INSERT INTO bookmarks (url, title) VALUES ('http://makersacademy.com', 'Makers');"
+    )
+    visit('/')
+    click_button("View 'marks")
+    expect(page).to have_link("Makers", :href=>"http://makersacademy.com")
+  end
+end

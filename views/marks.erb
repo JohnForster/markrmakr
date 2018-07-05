@@ -1,10 +1,12 @@
 <link rel="stylesheet" href="stylesheet.css" type="text/css" />
-<h2>MarkrMakr</h2>
+<h2><a href="/marks" class=backlink>MarkrMakr</a></h2>
 <center>
   <h1> Yr 'marks </h1>
   <div>
     <% @marks.each { |mark| %>
-      <%= mark.title %> <br>
+      <a href=<%=mark.url%>>
+        <%= mark.title %> <br>
+      </a>
     <% } %>
   </div>
   <br>
