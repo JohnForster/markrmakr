@@ -4,21 +4,18 @@ require 'uri'
 # Handles bookmark for the MarkrMakr app.
 class Bookmark
   attr_reader :id, :title, :url
+  DATABASE = 'bookmark_manager'.freeze
+  TEST_DATABASE = 'bookmark_manager_test'.freeze
 
-  def self.all
-    results = connection.exec 'SELECT * FROM bookmarks'
-    results.map { |mark|
-      Bookmark.new(title: mark['title'], url: mark['url'], id: mark['id'])
-    }
+  private
+
+  def initialize(args)
+    @title = args[:title]
+    @url = args[:url]
+    @id = args[:id].to_i
   end
 
-  def self.connection
-    PG.connect dbname: dbname
-  end
-
-  def self.dbname
-    ENV['ENVIRONMENT'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'
-  end
+  public
 
   def self.add(options)
     return false unless url?(options[:url])
@@ -31,19 +28,51 @@ class Bookmark
     Bookmark.new(url: options[:url], title: options[:title], id: id)
   end
 
+  def self.all
+    results = connection.exec 'SELECT * FROM bookmarks'
+    results.map do |mark|
+      Bookmark.new(title: mark['title'], url: mark['url'], id: mark['id'])
+    end
+  end
+
+  def self.connection
+    PG.connect(dbname: dbname)
+  end
+
+  def self.dbname
+    ENV['ENVIRONMENT'] == 'test' ? TEST_DATABASE : DATABASE
+  end
+
   def self.url?(url)
     url =~ /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/
   end
 
-  def ==(other)
-    @id == other.id
+  def self.find(id)
+    mark = connection.exec(
+      "SELECT title, url, id FROM bookmarks
+       WHERE id = #{id};"
+    ) # returns [{title: "title", url: "url", id: "id"}]
+    mark = mark.first
+    Bookmark.new(title: mark['title'], url: mark['url'], id: mark['id'])
   end
 
-  private
+  def self.delete(id)
+    connection.exec(
+      "DELETE FROM bookmarks
+       WHERE id = #{id};"
+    )
+  end
 
-  def initialize(args)
-    @title = args[:title]
-    @url = args[:url]
-    @id = args[:id].to_i
+  def self.update(args)
+    connection.exec(
+      "UPDATE bookmarks
+       SET title = '#{args[:title]}', url = '#{args[:url]}'
+       WHERE id = #{args[:id]};"
+    )
+    Bookmark.new(title: args[:title], url: args[:url], id: args[:id])
+  end
+
+  def ==(other)
+    @id == other.id
   end
 end

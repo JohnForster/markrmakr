@@ -1,12 +1,16 @@
 <link rel="stylesheet" href="stylesheet.css" type="text/css" />
 <h2><a href="/marks" class=backlink>MarkrMakr</a></h2>
 <center>
-  <h1> Yr 'marks </h1>
+  <h1> Yr marks </h1>
   <div>
     <% @marks.each { |mark| %>
       <a href=<%=mark.url%>>
-        <%= mark.title %> <br>
+        <%= mark.title %>
       </a>
+      <form class=inline_form action=/marks/<%=mark.id%>/edit>
+        <input type=submit id="<%=mark.title%>" value='Edit'><br>
+      </form>
+      <!-- <a href=marks/<%=mark.id%>/edit>Delete</a><br> -->
     <% } %>
   </div>
   <br>

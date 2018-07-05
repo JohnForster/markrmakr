@@ -6,6 +6,7 @@ require_relative './lib/bookmark.rb'
 # The MarkrMakr main app controller.
 class MarkrMakr < Sinatra::Base
   enable :sessions
+  set :method_override, true # Allows delete and patch in erbs.
   register Sinatra::Flash
 
   get '/' do
@@ -28,6 +29,21 @@ class MarkrMakr < Sinatra::Base
       flash[:notice] = 'Invalid URL!'
       redirect '/marks/new'
     end
+  end
+
+  get '/marks/:id/edit' do
+    @bookmark = Bookmark.find(params['id'])
+    erb(:edit_mark)
+  end
+
+  delete '/marks/:id' do
+    Bookmark.delete(params['id'])
+    redirect '/marks'
+  end
+
+  patch '/marks/:id' do
+    Bookmark.update(id: params['id'], url: params[:URL], title: params[:title])
+    redirect '/marks'
   end
 
   run! if app_file == $PROGRAM_NAME

@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="../../stylesheet.css" type="text/css" />
+
+
+<h2><a href="/marks" class=backlink>MarkrMakr</a></h2>
+<center>
+
+  <form action=/marks/<%=@bookmark.id%> method='post'>
+    <input type="hidden" name="_method" value="PATCH">
+    <h1>Edit a mark</h1>
+    <div>
+      Title:
+      <input type=text name=title value=<%=@bookmark.title%>><br>
+      URL:
+      <input type=text name=URL value=<%=@bookmark.url%>><br><br>
+      <input type=submit value="Change mark">
+    </div>
+  </form>
+
+  <form action="/marks/<%=@bookmark.id%>" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type=submit value="Delete this mark">
+  </form>
+  <%=flash[:notice]%>
+</center>
