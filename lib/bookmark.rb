@@ -6,8 +6,10 @@ class Bookmark
   attr_reader :id, :title, :url
 
   def self.all
-    results = connection.exec 'SELECT title FROM bookmarks'
-    results.map { |bookmark| bookmark['title'] }
+    results = connection.exec 'SELECT * FROM bookmarks'
+    results.map { |mark|
+      Bookmark.new(title: mark['title'], url: mark['url'], id: mark['id'])
+    }
   end
 
   def self.connection
@@ -25,7 +27,7 @@ class Bookmark
        VALUES ('#{options[:url]}', '#{options[:title]}')
        RETURNING id;"
     ) # This returns [{"id" => "123"}]
-    id = return_array[0]['id'].to_i
+    id = return_array[0]['id']
     Bookmark.new(url: options[:url], title: options[:title], id: id)
   end
 
@@ -33,11 +35,15 @@ class Bookmark
     url =~ /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/
   end
 
+  def ==(other)
+    @id == other.id
+  end
+
   private
 
   def initialize(args)
     @title = args[:title]
     @url = args[:url]
-    @id = args[:id]
+    @id = args[:id].to_i
   end
 end
