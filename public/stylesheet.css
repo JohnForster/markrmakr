@@ -1,15 +1,17 @@
 /*
   000022-001242-0094c6-005e7c-040f16
   870058-f2d0a4-a4303f-ffeccc-c8d6af
-  157a6e-499f68-77b28c-b4654a-f9f9f8
+  293132-474044-4f5165-547aa5-50d8d7 - Grey
+  157a6e-499f68-77b28c-b4654a-f9f9f8 - Green
+  944654-a05c7b-af90a9-ded6d6-f9e7e7
 */
 
 :root {
-  --color1: #4d685a;
-  --color2: #4fb286;
-  --color3: #3c896d;
-  --color4: #546d64;
-  --color5: #dffff0;
+  --color0: #157a6e;
+  --color1: #499f68;
+  --color2: #77b28c;
+  --color3: #b4654a;
+  --color4: #f9f9f8;
   --error1: #7d1c3a;
 }
 
@@ -36,13 +38,15 @@ a:hover{
 
 body {
   font-family: arial;
-  background-color: var(--color1);
-  color: var(--color5);
+  background-color: var(--color0);
+  color: var(--color4);
   line-height: 25px;
+  display: inline;
+  vertical-align: top;
 }
 
 div {
-  background-color: var(--color2);
+  background-color: var(--color1);
   padding: 25px;
   width: 350px;
   border-radius: 10px;
@@ -50,18 +54,28 @@ div {
 
 h1 {
   font-size: 40pt;
-  -webkit-text-stroke: 1px var(--color5);
-  color: var(--color3);
+  -webkit-text-stroke: 1px var(--color4);
+  color: var(--color2);
   text-shadow: 2px 2px 4px #000000;
 }
 
 h2 {
   font-size: 30pt;
-  -webkit-text-stroke: 1px var(--color5);
-  color: var(--color3);
+  -webkit-text-stroke: 1px var(--color4);
+  color: var(--color2);
   text-shadow: 2px 2px 4px #000000;
 }
 
-.inline_form {
+.inline {
+  display: inline;
+}
+
+.comments {
+  font-size: 10pt;
+  margin: 0px;
+}
+
+summary {
+  font-size: 10pt;
   display: inline;
 }

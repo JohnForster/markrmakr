@@ -19,19 +19,26 @@ class Bookmark
 
   def self.add(options)
     return false unless url?(options[:url])
-    return_array = connection.exec(
+    id_array = connection.exec(
       "INSERT INTO bookmarks (url, title)
        VALUES ('#{options[:url]}', '#{options[:title]}')
        RETURNING id;"
     ) # This returns [{"id" => "123"}]
-    id = return_array[0]['id']
-    Bookmark.new(url: options[:url], title: options[:title], id: id)
+    Bookmark.new(
+      url: options[:url],
+      title: options[:title],
+      id: id_array[0]['id']
+    )
   end
 
   def self.all
     results = connection.exec 'SELECT * FROM bookmarks'
     results.map do |mark|
-      Bookmark.new(title: mark['title'], url: mark['url'], id: mark['id'])
+      Bookmark.new(
+        title: mark['title'],
+        url: mark['url'],
+        id: mark['id']
+      )
     end
   end
 
@@ -48,6 +55,7 @@ class Bookmark
   end
 
   def self.find(id)
+    # return false if id does not exist?
     mark = connection.exec(
       "SELECT title, url, id FROM bookmarks
        WHERE id = #{id};"

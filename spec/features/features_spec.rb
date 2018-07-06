@@ -8,7 +8,7 @@ feature 'viewing links' do
        VALUES ('makersacademy.com', 'Makers');"
     )
     visit('/')
-    click_button("View marks")
+    click_button('View marks')
     expect(page).to have_content('Makers')
     expect(page).not_to have_content('makersacademy.com')
   end

@@ -7,9 +7,13 @@
       <a href=<%=mark.url%>>
         <%= mark.title %>
       </a>
-      <form class=inline_form action=/marks/<%=mark.id%>/edit>
-        <input type=submit id="<%=mark.title%>" value='Edit'><br>
+      <form class=inline action=/marks/<%=mark.id%>/comments>
+        <input type=submit id="<%=mark.title%>" value='Comments'>
       </form>
+      <form class=inline action=/marks/<%=mark.id%>/edit>
+        <input type=submit id="<%=mark.title%>" value='Edit'>
+      </form>
+      <br>
       <!-- <a href=marks/<%=mark.id%>/edit>Delete</a><br> -->
     <% } %>
   </div>

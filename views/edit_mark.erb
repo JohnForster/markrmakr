@@ -1,10 +1,9 @@
 <link rel="stylesheet" href="../../stylesheet.css" type="text/css" />
 
-
 <h2><a href="/marks" class=backlink>MarkrMakr</a></h2>
 <center>
 
-  <form action=/marks/<%=@bookmark.id%> method='post'>
+  <form action="/marks/<%=@bookmark.id%>" method='post'>
     <input type="hidden" name="_method" value="PATCH">
     <h1>Edit a mark</h1>
     <div>

@@ -1,5 +1,6 @@
 require_relative '../lib/bookmark.rb'
 
+# Class for wrapping bookmarks and interacting with bookmark database.
 describe Bookmark do
   describe '.all' do
     it 'should return all bookmarks' do
